@@ -1,12 +1,11 @@
-﻿namespace MauiWeatherApp
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
+﻿namespace MauiWeatherApp;
 
-            MainPage = new AppShell();
-        }
+public partial class App : Application
+{
+    public App(MainPage page)
+    {
+        InitializeComponent();
+
+        MainPage = page;
     }
 }

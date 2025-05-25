@@ -1,25 +1,21 @@
-﻿namespace MauiWeatherApp
+﻿using MauiWeatherApp.ViewModels;
+
+namespace MauiWeatherApp;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private MainViewModel _viewModel;
+
+    public MainPage(MainViewModel viewModel)
     {
-        int count = 0;
-
-        public MainPage()
-        {
-            InitializeComponent();
-        }
-
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+        InitializeComponent();
+        _viewModel = viewModel;
+        this.BindingContext = viewModel;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _ = _viewModel.GetWeatherAsync();
+    }
 }
